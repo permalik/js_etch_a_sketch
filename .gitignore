@@ -1,0 +1,25 @@
+# mac system files
+
+.DS_Store
+
+# node_modules
+
+/node_modules/
+
+# text
+
+*.txt
+
+# api keys
+
+.env
+
+# sass config
+
+.sass-cache
+
+# testing
+
+/cypress/
+
+cypress.json
