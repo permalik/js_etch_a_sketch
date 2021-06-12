@@ -173,6 +173,36 @@ html {
   border-radius: 5px;
   margin-bottom: 2rem;
 }
+@-webkit-keyframes shake {
+  0% {
+    transform: rotate(3deg);
+  }
+  33.33% {
+    transform: rotate(-3deg);
+  }
+  66.66% {
+    transform: rotate(3deg);
+  }
+  100% {
+    transform: none;
+    transform: initial;
+  }
+}
+@keyframes shake {
+  0% {
+    transform: rotate(3deg);
+  }
+  33.33% {
+    transform: rotate(-3deg);
+  }
+  66.66% {
+    transform: rotate(3deg);
+  }
+  100% {
+    transform: none;
+    transform: initial;
+  }
+}
 
 .control-console {
   display: flex;

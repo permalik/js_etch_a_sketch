@@ -3,12 +3,36 @@ import './styles/main.scss';
 
 const container = document.querySelector('.container');
 const colorOptions = document.querySelectorAll('.color-option');
+const shakeClear = document.querySelector('[data-color="shake"]');
+const sizeControl = document.querySelector('.size-control');
 var color;
+var widthInput = 10;
 
-propagateGrid(10);
+window.addEventListener('load', () => {
+  propagateGrid(widthInput);
+});
+
+sizeControl.addEventListener('click', () => {
+  widthInput = selectWidth();
+  resetGrid();
+  propagateGrid(widthInput);
+});
 
 colorOptions.forEach((colorOption) => {
   colorOption.addEventListener('click', selectColorPen);
+});
+
+shakeClear.addEventListener('click', () => {
+  addShakeAnimation();
+  var pixels = container.querySelectorAll('div');
+  setTimeout(() => {
+    pixels.forEach((pixel) => {
+      pixel.style.backgroundColor = '#ffffff';
+    });
+  }, 6);
+  setTimeout(() => {
+    resetShakeAnimation();
+  }, 3000);
 });
 
 function propagateGrid(gridWidth) {
@@ -84,4 +108,32 @@ function randomColor() {
     randomColor = randomColor + '0'.repeat(7 - randomColor.length);
   }
   return randomColor;
+}
+
+function addShakeAnimation() {
+  container.style.animation = 'shake 1s linear';
+}
+
+function resetShakeAnimation() {
+  container.style.removeProperty('animation');
+}
+
+function selectWidth() {
+  do {
+    var customWidth = parseInt(window.prompt('Choose grid size (from 1 to 100 inclusive):'));
+
+    if (customWidth < 1) {
+      customWidth = parseInt(window.prompt('Too small, try again...Choose grid size (from 1 to 100 inclusive):'));
+    } else if (customWidth > 100) {
+      customWidth = parseInt(window.prompt('Too large, try again...Choose grid size (from 1 to 100 inclusive):'));
+    }
+  } while (isNaN(customWidth) || customWidth < 1 || customWidth > 100);
+  return customWidth;
+}
+
+function resetGrid() {
+  let pixels = container.querySelectorAll('div');
+  pixels.forEach((pixel) => {
+    container.removeChild(pixel);
+  });
 }

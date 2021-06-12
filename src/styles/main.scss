@@ -44,6 +44,21 @@ html {
   border: 2px solid black;
   border-radius: 5px;
   margin-bottom: 2rem;
+
+  @keyframes shake {
+    0% {
+      transform: rotate(3deg);
+    }
+    33.33% {
+      transform: rotate(-3deg);
+    }
+    66.66% {
+      transform: rotate(3deg);
+    }
+    100% {
+      transform: initial;
+    }
+  }
 }
 
 .control-console {

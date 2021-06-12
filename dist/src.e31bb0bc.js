@@ -203,10 +203,32 @@ require("./styles/main.scss");
 
 var container = document.querySelector('.container');
 var colorOptions = document.querySelectorAll('.color-option');
+var shakeClear = document.querySelector('[data-color="shake"]');
+var sizeControl = document.querySelector('.size-control');
 var color;
-propagateGrid(10);
+var widthInput = 10;
+window.addEventListener('load', function () {
+  propagateGrid(widthInput);
+});
+sizeControl.addEventListener('click', function () {
+  widthInput = selectWidth();
+  resetGrid();
+  propagateGrid(widthInput);
+});
 colorOptions.forEach(function (colorOption) {
   colorOption.addEventListener('click', selectColorPen);
+});
+shakeClear.addEventListener('click', function () {
+  addShakeAnimation();
+  var pixels = container.querySelectorAll('div');
+  setTimeout(function () {
+    pixels.forEach(function (pixel) {
+      pixel.style.backgroundColor = '#ffffff';
+    });
+  }, 6);
+  setTimeout(function () {
+    resetShakeAnimation();
+  }, 3000);
 });
 
 function propagateGrid(gridWidth) {
@@ -292,6 +314,35 @@ function randomColor() {
   }
 
   return randomColor;
+}
+
+function addShakeAnimation() {
+  container.style.animation = 'shake 1s linear';
+}
+
+function resetShakeAnimation() {
+  container.style.removeProperty('animation');
+}
+
+function selectWidth() {
+  do {
+    var customWidth = parseInt(window.prompt('Choose grid size (from 1 to 100 inclusive):'));
+
+    if (customWidth < 1) {
+      customWidth = parseInt(window.prompt('Too small, try again...Choose grid size (from 1 to 100 inclusive):'));
+    } else if (customWidth > 100) {
+      customWidth = parseInt(window.prompt('Too large, try again...Choose grid size (from 1 to 100 inclusive):'));
+    }
+  } while (isNaN(customWidth) || customWidth < 1 || customWidth > 100);
+
+  return customWidth;
+}
+
+function resetGrid() {
+  var pixels = container.querySelectorAll('div');
+  pixels.forEach(function (pixel) {
+    container.removeChild(pixel);
+  });
 }
 },{"./styles/reset.scss":"styles/reset.scss","./styles/main.scss":"styles/main.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
