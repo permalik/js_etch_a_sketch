@@ -2,6 +2,16 @@
   font-size: 62.5%;
 }
 
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 .body {
   background: linear-gradient(10deg, hsl(346, 64%, 54%), rgba(255, 0, 0, 0) 70%), linear-gradient(110deg, hsl(22, 100%, 71%), rgba(0, 255, 0, 0) 90%),
     linear-gradient(200deg, hsl(182, 77%, 58%), rgba(0, 0, 255, 0) 90%);
@@ -52,16 +62,18 @@
     background: transparent;
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: calc(1vw + 0.2rem);
-    font-weight: 600;
+    font-weight: 800;
     border: 2px solid black;
     border-radius: 5px;
-    position: relative;
+    box-shadow: 0 1px 5px hsl(0, 17%, 49%);
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
     padding: calc(0.5vw + 0.1rem);
 
     &:hover {
       color: white;
       background: linear-gradient(to right, hsla(346, 64%, 54%, 0.5), hsla(182, 77%, 58%, 0.5), hsla(22, 100%, 71%, 0.5));
       border-color: white;
+      box-shadow: 0 4px 5px hsl(0, 17%, 49%);
       cursor: pointer;
     }
   }
@@ -98,10 +110,6 @@
     margin-bottom: 0.5rem;
   }
 }
-
-// .size-control {
-//   backgr
-// }
 
 // .container * {
 //   border: 1px solid black;

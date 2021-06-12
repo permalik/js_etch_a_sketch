@@ -132,6 +132,16 @@ table {
   font-size: 62.5%;
 }
 
+html {
+  box-sizing: border-box;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
 .body {
   background: linear-gradient(10deg, #d53f62, rgba(255, 0, 0, 0) 70%), linear-gradient(110deg, #ffa16b, rgba(0, 255, 0, 0) 90%), linear-gradient(200deg, #41e1e6, rgba(0, 0, 255, 0) 90%);
   display: flex;
@@ -179,16 +189,18 @@ table {
   background: transparent;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
   font-size: calc(1vw + 0.2rem);
-  font-weight: 600;
+  font-weight: 800;
   border: 2px solid black;
   border-radius: 5px;
-  position: relative;
+  box-shadow: 0 1px 5px #926868;
+  box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
   padding: calc(0.5vw + 0.1rem);
 }
 .control-console .control-option:hover {
   color: white;
   background: linear-gradient(to right, rgba(213, 63, 98, 0.5), rgba(65, 225, 230, 0.5), rgba(255, 161, 107, 0.5));
   border-color: white;
+  box-shadow: 0 4px 5px #926868;
   cursor: pointer;
 }
 
