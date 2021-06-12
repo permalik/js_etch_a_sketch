@@ -202,25 +202,96 @@ require("./styles/reset.scss");
 require("./styles/main.scss");
 
 var container = document.querySelector('.container');
-var gridWidth = 1;
-var gridColumnQuantity = Math.pow(gridWidth, 2);
-var divSpawns;
-var spawnSize = 25 / gridWidth;
-propagateGrid();
-styleGrid();
+var colorOptions = document.querySelectorAll('.color-option');
+var color;
+propagateGrid(10);
+colorOptions.forEach(function (colorOption) {
+  colorOption.addEventListener('click', selectColorPen);
+});
 
-function propagateGrid() {
+function propagateGrid(gridWidth) {
+  var gridColumnQuantity = Math.pow(gridWidth, 2);
+
   for (var i = 0; i < gridColumnQuantity; i++) {
-    divSpawns = document.createElement('div');
+    var divSpawns = document.createElement('div');
+    var spawnSize = 25 / gridWidth;
+    container.style.display = 'grid';
+    container.style.gridTemplateColumns = "repeat(".concat(gridWidth, ", 1fr)");
+    container.style.gridTemplateRows = "repeat(".concat(gridWidth, ", 1fr)");
     container.appendChild(divSpawns);
     divSpawns.style.width = "".concat(spawnSize, "vw");
     divSpawns.style.height = "".concat(spawnSize, "vw");
   }
+
+  var pixels = container.querySelectorAll('div');
+  pixels.forEach(function (pixel) {
+    pixel.addEventListener('mouseover', toggleColor);
+  });
 }
 
-function styleGrid() {
-  container.style.display = 'grid';
-  container.style.gridTemplateColumns = "repeat(".concat(gridWidth, ", 1fr)");
+function selectColorPen(e) {
+  switch (e.target.dataset.color) {
+    case 'rainbow':
+      color = 'rainbow';
+      break;
+
+    case 'greyscale':
+      color = 'greyscale';
+      break;
+
+    case 'eraser':
+      color = 'eraser';
+      break;
+
+    case 'black':
+      color = 'black';
+      break;
+  }
+}
+
+function toggleColor() {
+  switch (color) {
+    case 'greyscale':
+      if (this.style.backgroundColor.match(/rgba/)) {
+        var opacityIterator = Number(this.style.backgroundColor.slice(-4, -1));
+
+        if (opacityIterator <= 0.9) {
+          this.style.backgroundColor = "rgba(0, 0, 0, ".concat(opacityIterator + 0.1, ")");
+          this.classList.add('greyscale');
+        }
+      } else if (this.classList == 'greyscale' && this.style.backgroundColor == 'rgb(0, 0, 0)') {
+        return;
+      } else {
+        this.style.backgroundColor = 'rgba(0, 0, 0, 0.1)';
+      }
+
+      break;
+
+    case 'rainbow':
+      this.style.backgroundColor = randomColor();
+      this.classList.remove('greyscale');
+      break;
+
+    case 'eraser':
+      this.style.backgroundColor = '#ffffff';
+      this.classList.remove('greyscale');
+      break;
+
+    case 'black':
+      this.style.backgroundColor = '#000000';
+      this.classList.remove('greyscale');
+      break;
+  }
+}
+
+function randomColor() {
+  var randomColor = '#' + Math.floor(Math.random() * 16777215).toString(16);
+
+  if (randomColor.length < 7) {
+    randomColor = randomColor + '0'.repeat(7 - randomColor.length);
+  }
+
+  return randomColor;
 }
 },{"./styles/reset.scss":"styles/reset.scss","./styles/main.scss":"styles/main.scss"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
