@@ -1,1 +1,3 @@
-Etch-a-sketch is a game-like application that allows users to do draw things with javascript mouse events.
+js_etch_a_sketch is a recreation of the retro Etch-A-Sketch toy
+
+Available here: https://jsetchasketch.netlify.app/
